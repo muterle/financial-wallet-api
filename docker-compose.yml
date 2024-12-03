@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:alpine
+    ports:
+      - '5432:5432'
+    container_name: 'postgres'
+    restart: always
+    volumes:
+      - ./pg-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: mig1210
+      POSTGRES_DB: financial-wallet-db
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: mig1210
+  nestjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: financial-wallet-api
+    environment:
+      - PORT=${PORT}
+    restart: always
+    ports:
+      - '3001:3001'
+    depends_on:
+      - db
+    volumes:
+      - ./src:/app/src
+    env_file:
+      - .env
