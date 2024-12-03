@@ -16,11 +16,6 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   synchronize: true,
   schema: process.env.DATABASE_SCHEMA,
   autoLoadEntities: true,
-  ssl:
-    process.env.NODE_ENV === 'development'
-      ? false
-      : {
-          rejectUnauthorized: false,
-        },
+  ssl: false,
   cache: true,
 };

@@ -12,5 +12,5 @@ COPY . /usr/src/app
 
 EXPOSE 3001
 
-#CMD ["npm", "run", "start:prod"]
-CMD npm run start:dev
+CMD ["npm", "run", "start"]
+# CMD ["npm", "run", "start:dev"]

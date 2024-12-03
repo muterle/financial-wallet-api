@@ -93,7 +93,7 @@ export class User {
   @DeleteDateColumn({ name: 'deleted_at', type: 'timestamp' })
   deletedAt: Date;
 
-  async checkPassword(password: string): Promise<boolean> {
+  checkPassword(password: string) {
     return bcrypt.compareSync(password, this.password);
   }
 }

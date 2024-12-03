@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { CustomLogger } from './shared/logger/custom.logger';
+import { LoggerErrorInterceptor } from 'nestjs-pino';
 
 async function bootstrap() {
   const port = process.env.PORT ?? 3000;
@@ -15,6 +16,7 @@ async function bootstrap() {
   });
 
   app.useLogger(app.get(CustomLogger));
+  app.useGlobalInterceptors(new LoggerErrorInterceptor());
 
   const config = new DocumentBuilder()
     .addBearerAuth({
